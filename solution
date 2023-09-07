@@ -1,0 +1,37 @@
+#Define which numbers are prime
+def prime_check(num):
+
+    #Prime is not less than one
+    if num <= 1:
+        return False
+
+    #Define both 2 and 3 as prime
+    if num <= 3:
+        return True
+
+    #Use remainder function to determine if n divisible by 2 or 3
+    #Prime numbers not be divisible by any number other than 1 and themselves
+    if num % 2 == 0 or num % 3 == 0:
+        return False
+
+    #Use while loop to check if num is divisible by any numbers of the form 6k ± 1 
+    #Loop determines any potential divisors for prime numbers greater than 3
+    i = 5
+    while i * i <= num:
+        if num % i == 0 or num % (i + 2) == 0:
+            return False
+        i += 6
+    return True
+
+#Create for loop to add all prime numbers within n
+def sum_primes(n):
+    total_sum = 0
+    for i in range(2, n + 1):
+        if prime_check(i):
+            total_sum += i
+    return total_sum
+
+#Ask the user to input a random number for n
+n = int(input("Enter a number (N): "))
+result = sum_primes(n)
+print(f"The sum of prime numbers to {n} is {result}")
